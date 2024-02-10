@@ -18,13 +18,15 @@ jobs:
       run: |
         npm install
         npm run build
-    - name: Fix permissions
+    - name: Copy and fix permissions
       run: |
-        chmod -c -R +rX "dist/" | while read line; do
+        cp -r dist _site
+        chmod -c -R +rX "_site/" | while read line; do
           echo "::warning title=Invalid file permissions automatically fixed::$line"
         done
     - name: Upload Pages artifact
-      uses: actions/upload-pages-artifact@v3   
+      uses: actions/upload-pages-artifact@v3
+        
   deploy: 
     # Add a dependency to the build job
     needs: build
