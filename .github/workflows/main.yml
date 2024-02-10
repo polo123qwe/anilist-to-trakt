@@ -18,9 +18,11 @@ jobs:
       run: |
         npm install
         npm run build
-    - name: Copy and fix permissions
+    - name: Copy dist files
       run: |
         cp -r dist _site
+    - name: Fix permissions
+      run: |
         chmod -c -R +rX "_site/" | while read line; do
           echo "::warning title=Invalid file permissions automatically fixed::$line"
         done
