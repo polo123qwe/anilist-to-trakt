@@ -18,7 +18,7 @@ import os from "os";
         console.log("Pushing to gh-pages...");
         await execa("git", ["push", "origin", "HEAD:gh-pages", "--force"]);
         if (isWin) {
-            await execa("Remove-Item", ["-LiteralPath", folderName, "-Force", "-Recurse"]);
+            await execa("rm", [folderName, "-r", "-f"]);
         } else {
             await execa("rm", ["-r", folderName]);
         }
